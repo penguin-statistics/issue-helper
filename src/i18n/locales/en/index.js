@@ -1,10 +1,9 @@
 export default {
-  _label: 'EN',
+  _label: 'English',
 
   // intro
   'intro': require('./intro.md'),
   'intro-modal-title': 'The reason behind our strict issue policy',
-  'intro-modal': require('./intro-modal.md'),
 
   // bug report
   'repo-title': 'I am opening an issue for',
@@ -15,21 +14,11 @@ export default {
   'version-title': 'Version',
   'version-subtitle': 'Check if the issue is reproducible with the latest stable version of Vue.',
 
-  'repro-title': 'Link to minimal reproduction',
-  'repro-subtitle': require('./repro-subtitle.md'),
-  'repro-modal-title': 'About Reproductions',
-  'repro-modal': require('./repro-modal.md'),
-  'cli-repro-subtitle': require('./cli-repro-subtitle.md'),
-  'cli-no-repro': 'If your issue cannot be reproduced with code, check here.',
-
-  'node-and-os-title': 'Node, npm/yarn and OS info',
-  'node-and-os-subtitle': 'Please specify node.js version, npm or yarn version, OS name & version. Example: Node 10.7.0 / yarn 1.7.0 / Windows 10',
-
-  'cli-envinfo-title': 'Environment Info',
-  'cli-envinfo-subtitle': require('./cli-envinfo-subtitle.md'),
-
   'browser-and-os-title': 'Browser and OS info',
   'browser-and-os-subtitle': 'Please specify browser name & version, OS name & version. Example: Chrome 62 / Windows 10',
+
+  'url-title': "URL",
+  'url-subtitle': "The URL that the bug occurs at. (e.g. https://penguin-stats.io/report)",
 
   'steps-title': 'Steps to reproduce',
   'steps-subtitle': require('./steps-subtitle.md'),

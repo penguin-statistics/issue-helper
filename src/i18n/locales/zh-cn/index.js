@@ -4,7 +4,6 @@ export default {
   // intro
   'intro': require('./intro.md'),
   'intro-modal-title': '为什么要有这么严格的 issue 规定',
-  'intro-modal': require('./intro-modal.md'),
 
   // bug report
   'repo-title': '相关库',
@@ -15,21 +14,11 @@ export default {
   'version-title': '版本',
   'version-subtitle': '请检查问题是否存在于 Vue 的最新版本中。',
 
-  'repro-title': '重现链接',
-  'repro-subtitle': require('./repro-subtitle.md'),
-  'repro-modal-title': '关于重现',
-  'repro-modal': require('./repro-modal.md'),
-  'cli-repro-subtitle': require('./cli-repro-subtitle.md'),
-  'cli-no-repro': '如果你的问题无法用代码重现，点选这里。',
-
-  'node-and-os-title': 'Node.js、npm/yarn 以及操作系统信息',
-  'node-and-os-subtitle': '请写明 Node.js 版本、npm/yarn 的版本、操作系统的名称以及版本，例如: Node 10.7.0 / yarn 1.7.0 / Windows 10',
-
-  'cli-envinfo-title': '环境信息',
-  'cli-envinfo-subtitle': require('./cli-envinfo-subtitle.md'),
-
   'browser-and-os-title': '浏览器和操作系统信息',
   'browser-and-os-subtitle': '请写明浏览器和操作系统的名称/版本，例如: Chrome 62 / Windows 10',
+
+  'url-title': "URL",
+  'url-subtitle': "bug 出现在的 URL 地址，例如 https://penguin-stats.io/report",
 
   'steps-title': '重现步骤',
   'steps-subtitle': require('./steps-subtitle.md'),

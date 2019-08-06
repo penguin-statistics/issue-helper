@@ -2,87 +2,27 @@
   <div class="bug-report" style="margin:0">
     <div class="vue-ui-grid col-2 default-gap">
       <VueFormField
-        :title="i18n('version-title')"
-        :subtitle="i18n('version-subtitle')"
-      >
-        <VueTypeAhead
-          v-model="attrs.version"
-          :suggestions="suggestions"
-          :loading="loadingVersion"
-          show-all
-          show-max="30"
-          restrict-choice
-          required
-        />
-      </VueFormField>
-
-      <VueFormField
-        v-if="repo === 'vuejs/vue-devtools'"
+        class="span-2"
         :title="i18n('browser-and-os-title')"
       >
         <VueInput
           v-model="attrs.browserAndOS"
           required
-        />
-
-        <i18n
-          slot="subtitle"
-          id="browser-and-os-subtitle"
+          disabled
         />
       </VueFormField>
 
-      <template v-else>
-        <VueFormField
-          v-if="isCLI && doesNotSupportVueInfo"
-          :title="i18n('node-and-os-title')"
-        >
-          <VueInput
-            v-model="attrs.nodeAndOS"
-            required
-          />
-
-          <i18n
-            slot="subtitle"
-            id="node-and-os-subtitle"
-          />
-        </VueFormField>
-
-        <VueFormField
-          v-else-if="isCLI"
-          :title="i18n('cli-envinfo-title')"
+      <VueFormField
           class="span-2"
-        >
-          <VueInput
-            v-model="attrs.cliEnvInfo"
-            type="textarea"
-            required
-          />
-
-          <i18n
-            slot="subtitle"
-            id="cli-envinfo-subtitle"
-          />
-        </VueFormField>
-
-        <VueFormField :title="i18n('repro-title')">
-          <VueInput
+          :title="i18n('url-title')"
+      >
+        <VueInput
             type="url"
-            v-model="attrs.reproduction"
-            :disabled="isCLI && reproNotAvailable"
+            v-model="attrs.url"
             required
-          />
-
-          <template slot="subtitle">
-            <i18n
-              :id="isCLI ? 'cli-repro-subtitle' : 'repro-subtitle'"
-              @click-modal="show = true"
-            />
-            <VueSwitch v-if="isCLI" v-model="reproNotAvailable">
-              <i18n id="cli-no-repro"/>
-            </VueSwitch>
-          </template>
-        </VueFormField>
-      </template>
+            :disabled="prescribedUrl"
+        />
+      </VueFormField>
 
       <VueFormField
         class="span-2"
@@ -148,6 +88,7 @@
 <script>
 import { gt, lt } from 'semver'
 import { generate } from '../helpers'
+import { detect } from 'detect-browser'
 
 export default {
   props: ['repo'],
@@ -156,105 +97,63 @@ export default {
     return {
       show: false,
       attrs: {
-        version: '',
         reproduction: '',
         steps: '',
         expected: '',
         actual: '',
         extra: '',
+        url: '',
         browserAndOS: '',
-        nodeAndOS: '',
-        cliEnvInfo: '',
       },
       versions: [],
-      loadingVersion: false,
       reproNotAvailable: false
     }
   },
 
+  created () {
+    const urlParams = new URLSearchParams(window.location.search);
+    this.attrs.url = urlParams.get("url") || '';
+
+    this.attrs.browserAndOS = navigator.userAgent
+  },
+
   computed: {
-    suggestions () {
-      return this.versions
-        .slice()
-        .sort((a, b) => gt(a.value, b.value) ? -1 : 1)
+    prescribedUrl () {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get("url")
     },
-
-    isCLI () {
-      return this.repo === 'vuejs/vue-cli'
-    },
-
-    doesNotSupportVueInfo () {
-      return this.attrs.version && lt(this.attrs.version, '3.2.0')
+    isBrowserEnvironment () {
+      return this.repo !== 'penguin-statistics/backend'
     }
   },
 
   watch: {
     repo () {
-      this.versions = []
+      this.versions = [];
       this.attrs.version = ''
-      this.fetchVersions()
     }
   },
 
-  created () {
-    this.fetchVersions()
+  mounted () {
+    this.browserAndOS = navigator.userAgent
   },
 
   methods: {
-    async fetchVersions (page = 1) {
-      this.loadingVersion = true
-      const repo = this.repo
-      const response = await fetch(`https://api.github.com/repos/${repo}/releases?page=${page}&per_page=100`)
-      const releases = await response.json()
-
-      if (this.repo !== repo) return
-
-      if (!releases || !(releases instanceof Array)) return false
-
-      this.versions = this.versions.concat(releases.map(
-        r => ({ value: /^v/.test(r.tag_name) ? r.tag_name.substr(1) : r.tag_name })
-      ))
-
-      const link = response.headers.get('Link')
-
-      if (link && link.indexOf('rel="next"') > -1) {
-        await this.fetchVersions(page + 1)
-      } else {
-        this.loadingVersion = false
-      }
-    },
-
     generate () {
       const {
-        version,
-        reproduction,
         steps,
         expected,
         actual,
         extra,
-        browserAndOS,
-        nodeAndOS,
-        cliEnvInfo
-      } = this.attrs
+        url,
+        browserAndOS
+      } = this.attrs;
 
-      return generate(`
-### Version
-${version}
+      return generate(`${browserAndOS ? `### Environment
+\`${browserAndOS}\`` : ``}
 
-${reproduction ? `### Reproduction link
-[${reproduction}](${reproduction})` : ``}
-
-${browserAndOS ? `### Browser and OS info
-${browserAndOS}` : ``}
-
-${nodeAndOS ? `### Node and OS info
-${nodeAndOS}` : ``}
-
-${cliEnvInfo ? `### Environment info
-\`\`\`
-${cliEnvInfo}
-\`\`\`
-` : ``}
+${url ? `### URL
+\`${url}\`` : ``}
 
 ### Steps to reproduce
 ${steps}
