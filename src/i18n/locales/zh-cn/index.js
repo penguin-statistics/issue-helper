@@ -1,6 +1,10 @@
 export default {
   _label: '中文',
 
+  // app metadata
+  'app-name': 'Issue 创建助手',
+  'org-name': '企鹅物流',
+
   // intro
   'intro': require('./intro.md'),
   'intro-modal-title': '为什么要有这么严格的 issue 规定',
@@ -11,11 +15,7 @@ export default {
   'type-title': '这是一个',
   'title-title': 'Issue 标题',
 
-  'version-title': '版本',
-  'version-subtitle': '请检查问题是否存在于 Vue 的最新版本中。',
-
   'browser-and-os-title': '浏览器和操作系统信息',
-  'browser-and-os-subtitle': '请写明浏览器和操作系统的名称/版本，例如: Chrome 62 / Windows 10',
 
   'url-title': "URL",
   'url-subtitle': "bug 出现在的 URL 地址，例如 https://penguin-stats.io/report",
@@ -29,10 +29,10 @@ export default {
   'extra-subtitle': '比如：遇到这个 bug 的业务场景、上下文。',
 
   // feature request
-  'rationale-title': '这个功能解决了什么问题？',
+  'rationale-title': '这个功能解决了什么具体问题？',
   'rationale-subtitle': require('./rationale-subtitle.md'),
 
-  'proposal-title': '你期望的 API 是怎样的？',
+  'proposal-title': '你期望的这个功能是怎样的？',
   'proposal-subtitle': require('./proposal-subtitle.md'),
 
   // preview
@@ -42,7 +42,7 @@ export default {
 
   // misc
   'bug-report': '错误报告',
-  'feature-request': '功能要求',
+  'feature-request': '功能需求',
   'similar-issues': '类似的 issue',
   'show-more': '展开',
   'show-less': '收起',

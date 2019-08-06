@@ -1,15 +1,17 @@
 <template>
   <nav class="app-header">
     <div class="container">
-      <div class="brand" href="#">
+      <a class="brand" href="/">
         <img
           class="logo"
           src="../assets/images/logo.png"
           alt="Logo of Penguin Statistics"
           height="24"
+
+          style="pointer-events: none"
         >
         Issue Helper
-      </div>
+      </a>
 
       <ul class="nav">
         <li
@@ -72,12 +74,21 @@ export default {
 
   .nav-link
     cursor default
+    padding 2px 4px
+    font-size 14px
     transition all 150ms ease-out
+    &:hover
+      text-shadow 0 1px 3px $vue-ui-color-dark
+      margin-top -3px
+    &:active
+      text-shadow 0 0 0 $vue-ui-color-dark
     &.active
+      padding 6px 10px
+      font-size 16px
+      text-shadow none
       background darken($vue-ui-color-light-neutral, 20%)
       color $vue-ui-color-dark
       border 1px solid darken($vue-ui-color-light-neutral, 60%)
-      padding 4px 6px
       border-radius 4px
     &:not(.active)
       cursor pointer

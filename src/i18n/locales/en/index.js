@@ -1,6 +1,10 @@
 export default {
   _label: 'English',
 
+  // app metadata
+  'app-name': 'Issue Helper',
+  'org-name': 'Penguin Statistics',
+
   // intro
   'intro': require('./intro.md'),
   'intro-modal-title': 'The reason behind our strict issue policy',
@@ -11,11 +15,7 @@ export default {
   'type-title': 'This is a',
   'title-title': 'Issue title',
 
-  'version-title': 'Version',
-  'version-subtitle': 'Check if the issue is reproducible with the latest stable version of Vue.',
-
   'browser-and-os-title': 'Browser and OS info',
-  'browser-and-os-subtitle': 'Please specify browser name & version, OS name & version. Example: Chrome 62 / Windows 10',
 
   'url-title': "URL",
   'url-subtitle': "The URL that the bug occurs at. (e.g. https://penguin-stats.io/report)",
@@ -29,10 +29,10 @@ export default {
   'extra-subtitle': 'e.g. some background/context of how you ran into this bug.',
 
   // feature request
-  'rationale-title': 'What problem does this feature solve?',
+  'rationale-title': 'What exact problem does this feature solve?',
   'rationale-subtitle': require('./rationale-subtitle.md'),
 
-  'proposal-title': 'What does the proposed API look like?',
+  'proposal-title': 'What does the proposed feature looks like?',
   'proposal-subtitle': require('./proposal-subtitle.md'),
 
   // preview

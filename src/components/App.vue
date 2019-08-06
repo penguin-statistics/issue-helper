@@ -54,7 +54,7 @@
           />
           <template slot="subtitle">
             <div class="similar-issues" v-if="issues.length">
-              {{ i18n('similar-issues') }}:
+              {{ i18n('similar-issues') }}
 
               <ul>
                 <li v-for="issue in issues" :key="issue.id">
@@ -65,7 +65,7 @@
                     rel="noreferrer"
                     tabindex="-1"
                   >
-                    {{ issue.title }}
+                    #<code>{{ issue.number }}</code> by <code>{{ issue.user.login }}</code>: <code>{{ issue.title }}</code>
                   </a>
                 </li>
               </ul>
@@ -176,8 +176,8 @@ export default {
   computed: {
     types () {
       return this.$lang && [
-        { id: 'bug-report', name: this.i18n('bug-report') },
-        { id: 'feature-request', name: this.i18n('feature-request') }
+        { id: 'bug-report', name: this.i18n('bug-report'), label: 'bug' },
+        { id: 'feature-request', name: this.i18n('feature-request'), label: 'feature%20request' }
       ]
     }
   },
@@ -186,10 +186,15 @@ export default {
     repo (value) {
       updateQuery({ repo: value })
     },
+    '$lang' () {
+      document.title = `${this.i18n('app-name')} | ${this.i18n('org-name')}`
+    }
   },
 
   created () {
     this.repo = getQuery().repo || 'penguin-statistics/frontend-v2'
+
+    document.title = `${this.i18n('app-name')} | ${this.i18n('org-name')}`
   },
 
   methods: {
@@ -213,8 +218,12 @@ export default {
     create () {
       const title = encodeURIComponent(this.title).replace(/%2B/gi, '+')
       const body = encodeURIComponent(this.generated.markdown).replace(/%2B/gi, '+')
-      const label = this.type === 'feature-request' ? '&labels=feature%20request' : ''
+      const label = `&labels=${this.types.find(v => v.id === this.type).label}`
       window.open(`https://github.com/${this.repo}/issues/new?title=${title}&body=${body}${label}`)
+
+      this.preview = false
+      this.title = ''
+
     },
   },
 }

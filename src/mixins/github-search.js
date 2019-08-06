@@ -45,8 +45,8 @@ export default {
           ).join(' ') + ' ' + term
 
       try {
-        const { items } = await axios.get(API_ENDPOINT, { params: { q } })
-        this.$data._issues = items || []
+        const { data } = await axios.get(API_ENDPOINT, { params: { q } })
+        this.$data._issues = data.items || []
       } catch (e) {
         // ignore
       }

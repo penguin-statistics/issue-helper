@@ -4,6 +4,8 @@
       <VueFormField
         class="span-2"
         :title="i18n('browser-and-os-title')"
+
+        v-if="isBrowserEnvironment"
       >
         <VueInput
           v-model="attrs.browserAndOS"
@@ -149,7 +151,7 @@ export default {
         browserAndOS
       } = this.attrs;
 
-      return generate(`${browserAndOS ? `### Environment
+      return generate(`${browserAndOS && this.isBrowserEnvironment ? `### Environment
 \`${browserAndOS}\`` : ``}
 
 ${url ? `### URL
