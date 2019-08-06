@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@vue/ui": "^0.5.2",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "blueimp-md5": "^2.11.0",
     "copy-to-clipboard": "^3.0.8",
     "detect-browser": "^4.6.0",
