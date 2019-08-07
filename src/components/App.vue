@@ -220,10 +220,9 @@ export default {
       const body = encodeURIComponent(this.generated.markdown).replace(/%2B/gi, '+')
       const label = `&labels=${this.types.find(v => v.id === this.type).label}`
       window.open(`https://github.com/${this.repo}/issues/new?title=${title}&body=${body}${label}`)
-
-      this.preview = false
-      this.title = ''
-
+      const qs = new URLSearchParams(document.location.search)
+      qs.delete("url")
+      document.location.replace(document.location.origin + document.location.pathname + "?" + qs.toString())
     },
   },
 }

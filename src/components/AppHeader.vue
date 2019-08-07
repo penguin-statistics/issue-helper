@@ -10,7 +10,7 @@
 
           style="pointer-events: none"
         >
-        Issue Helper
+        {{ i18n('app-name') }}
       </a>
 
       <ul class="nav">

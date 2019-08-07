@@ -24,6 +24,7 @@
             required
             :disabled="prescribedUrl"
         />
+        <i18n slot="subtitle" id="url-subtitle" v-if="!prescribedUrl" />
       </VueFormField>
 
       <VueFormField
@@ -122,7 +123,7 @@ export default {
   computed: {
     prescribedUrl () {
       const urlParams = new URLSearchParams(window.location.search);
-      return urlParams.get("url")
+      return !!urlParams.get("url")
     },
     isBrowserEnvironment () {
       return this.repo !== 'penguin-statistics/backend'

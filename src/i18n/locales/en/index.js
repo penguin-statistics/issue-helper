@@ -7,18 +7,17 @@ export default {
 
   // intro
   'intro': require('./intro.md'),
-  'intro-modal-title': 'The reason behind our strict issue policy',
 
   // bug report
   'repo-title': 'I am opening an issue for',
-  'repo-subtitle': 'Please make sure to file the issue at appropriate repo.',
+  'repo-subtitle': 'Please make sure to file the issue at appropriate repo',
   'type-title': 'This is a',
   'title-title': 'Issue title',
 
   'browser-and-os-title': 'Browser and OS info',
 
-  'url-title': "URL",
-  'url-subtitle': "The URL that the bug occurs at. (e.g. https://penguin-stats.io/report)",
+  'url-title': "The bug occurred at...",
+  'url-subtitle': "The URL that the bug occurred at (e.g. https://penguin-stats.io/report)",
 
   'steps-title': 'Steps to reproduce',
   'steps-subtitle': require('./steps-subtitle.md'),
@@ -26,7 +25,7 @@ export default {
   'expected-title': 'What is expected?',
   'actual-title': 'What is actually happening?',
   'extra-title': 'Any additional comments? (optional)',
-  'extra-subtitle': 'e.g. some background/context of how you ran into this bug.',
+  'extra-subtitle': 'e.g. some background/context of how you ran into this bug',
 
   // feature request
   'rationale-title': 'What exact problem does this feature solve?',
@@ -47,7 +46,7 @@ export default {
   'show-more': 'Show more',
   'show-less': 'Show less',
   'drop-warn':
-    `Unfortunately, image drop/uploading is not supported due to GitHub API ` +
+    `Unfortunately, file drop/uploading is not supported due to GitHub API ` +
     `limitations. However, you can create the issue first (which will take you ` +
-    `to GitHub) and then drop the images needed.`
+    `to GitHub) and then drop the files needed.`
 }
