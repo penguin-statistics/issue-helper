@@ -1,4 +1,4 @@
-import marked from 'marked'
+import { marked } from 'marked'
 import locales from './locales/index'
 import qs from 'qs'
 

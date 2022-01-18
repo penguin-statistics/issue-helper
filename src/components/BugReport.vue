@@ -89,74 +89,77 @@
 </template>
 
 <script>
-import { gt, lt } from 'semver'
-import { generate } from '../helpers'
-import { detect } from 'detect-browser'
+import { generate } from "../helpers";
 
 export default {
-  props: ['repo'],
+  props: ["repo"],
 
-  data () {
+  data() {
     return {
       show: false,
       attrs: {
-        reproduction: '',
-        steps: '',
-        expected: '',
-        actual: '',
-        extra: '',
-        url: '',
-        browserAndOS: '',
+        reproduction: "",
+        steps: "",
+        expected: "",
+        actual: "",
+        extra: "",
+        url: "",
+        browserAndOS: "",
       },
       versions: [],
-      reproNotAvailable: false
-    }
+      reproNotAvailable: false,
+    };
   },
 
-  created () {
+  created() {
     const urlParams = new URLSearchParams(window.location.search);
-    this.attrs.url = urlParams.get("url") || '';
+    this.attrs.url = urlParams.get("url") || "";
 
-    this.attrs.browserAndOS = navigator.userAgent
+    this.attrs.browserAndOS = navigator.userAgent;
   },
 
   computed: {
-    prescribedUrl () {
+    prescribedUrl() {
       const urlParams = new URLSearchParams(window.location.search);
-      return !!urlParams.get("url")
+      return !!urlParams.get("url");
     },
-    isBrowserEnvironment () {
-      return this.repo !== 'penguin-statistics/backend'
-    }
+    isBrowserEnvironment() {
+      return ![
+        "penguin-statistics/backend",
+        "penguin-statistics/backend-next",
+      ].includes(this.repo);
+    },
   },
 
   watch: {
-    repo () {
+    repo() {
       this.versions = [];
-      this.attrs.version = ''
-    }
+      this.attrs.version = "";
+    },
   },
 
-  mounted () {
-    this.browserAndOS = navigator.userAgent
+  mounted() {
+    this.browserAndOS = navigator.userAgent;
   },
 
   methods: {
-    generate () {
-      const {
-        steps,
-        expected,
-        actual,
-        extra,
-        url,
-        browserAndOS
-      } = this.attrs;
+    generate() {
+      const { steps, expected, actual, extra, url, browserAndOS } = this.attrs;
 
-      return generate(`${browserAndOS && this.isBrowserEnvironment ? `### Environment
-\`${browserAndOS}\`` : ``}
+      return generate(
+        `${
+          browserAndOS && this.isBrowserEnvironment
+            ? `### Environment
+\`${browserAndOS}\``
+            : ``
+        }
 
-${url ? `### URL
-\`${url}\`` : ``}
+${
+          url
+            ? `### URL
+\`${url}\``
+            : ``
+        }
 
 ### Steps to reproduce
 ${steps}
@@ -167,9 +170,10 @@ ${expected}
 ### What is actually happening?
 ${actual}
 
-${extra ? `---\n${extra}` : ''}
-  `.trim())
-    }
+${extra ? `---\n${extra}` : ""}
+  `.trim()
+      );
+    },
   },
-}
+};
 </script>
