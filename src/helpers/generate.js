@@ -1,4 +1,4 @@
-import marked from 'marked'
+import { marked } from 'marked'
 import copy from 'copy-to-clipboard'
 import md5 from 'blueimp-md5'
 
