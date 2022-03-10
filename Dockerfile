@@ -1,4 +1,4 @@
-FROM node:16 AS webbuilder
+FROM node:16 AS builder
 
 WORKDIR /app
 
