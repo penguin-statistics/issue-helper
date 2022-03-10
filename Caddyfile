@@ -1,0 +1,4 @@
+:8030 {
+    root * /srv
+    try_files {path}.html {path} /index.html
+}
