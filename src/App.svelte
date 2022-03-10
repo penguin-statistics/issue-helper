@@ -34,6 +34,8 @@
     align-items: center;
     justify-content: center;
     height: 100%;
+
+    background: #f0f0f0;
   }
 
   main {
