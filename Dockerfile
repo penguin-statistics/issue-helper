@@ -20,4 +20,4 @@ COPY --from=builder /app/dist /srv
 EXPOSE 8030
 
 ENTRYPOINT ["/sbin/tini", "--"]
-CMD [ "caddy" ]
+CMD [ "caddy", "run" ]
